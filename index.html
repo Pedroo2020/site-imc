@@ -1,26 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/estilo.css">
+    <title>Calculadora IMC</title>
 </head>
 <body>
+    <h1>Calculadora de Índice de massa Corporal (IMC)</h1>
 
-    <label for="">Informe seu nome:</label>
-    <input type="text" id="inputTexto">
+    <div class="boxInformation">
 
-    <button id="botaoEnviar" type="button">Enviar</button>
+
+        <div class="peso">
+            <label for="">Informe o seu peso (em kg):</label>
+            <input class="input" type="number" id="inputPeso" required>
+        </div>
+
+        <div class="altura">
+            <label for="">Informe sua altura (em metros):</label>
+            <input class="input" type="number" id="inputAltura" required>
+        </div>
+        
+        <button class="btn" id="botaoEnviar" type="button">CALCULAR</button>
+
+        <div class="resultado">
+            <p class="resultado" id="imcResultado"></p>
+        </div>
+    </div>
+
 
     <script>
 
-        function exibirNome() {
-            var input = document.getElementById("inputTexto")
-            alert(input.value)
+        function pegarPeso (){
+            var inputP = document.getElementById("inputPeso")
+            inputP = parseFloat(inputP.value)
+            return inputP
+        }
+
+        function pegarAltura () {
+            var inputA = document.getElementById("inputAltura")
+            inputA = parseFloat(inputA.value)
+            return inputA
+        }
+
+        function CalcularIMC() {
+            var altura = pegarAltura() 
+            var peso = pegarPeso()
+
+            var calculo = peso / (altura**2)
+
+            return calculo
+        }
+
+        function exibirResultado() {
+            var resultado = document.getElementById('imcResultado')
+            var calculo = CalcularIMC()
+
+            resultado.textContent = "Seu IMC é: " + calculo.toFixed(2)
+
+            if(calculo < 18.5){
+                resultado.textContent += ". Você está abaixo do peso"
+            }else if(calculo >= 18.5 && calculo <= 24.5){
+                resultado.textContent += ". Você está com o peso normal"
+            }else if(calculo >= 25 && calculo <= 29.9){
+                resultado.textContent += ". Você está com sobrepeso"
+            }else if(calculo >= 30){
+                resultado.textContent += ". Você está com obesidade"
+            }
         }
 
         var botao = document.getElementById("botaoEnviar")
-        botao.addEventListener('click', exibirNome)
+        botao.addEventListener('click', exibirResultado)
 
     </script>
 
