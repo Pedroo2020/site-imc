@@ -53,6 +53,8 @@ label {
 .input{
     width: 270px;
     height: 27px;
+    border: 1px solid black;
+    border-radius: 3px;
 }
 
 .btn {
