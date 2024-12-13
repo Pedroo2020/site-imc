@@ -111,30 +111,3 @@ label {
     }
 
 }
-
-@media (min-width: 1024px) {
-
-    h1 {
-        font-size: 55px;
-    }
-
-    .boxInformation {
-        width: 600px;
-        height: 500px;
-        gap: 50px;
-    }
-
-    .input {
-        width: 400px;
-    }
-
-    label {
-        font-size: 30px;
-    }
-
-    .btn {
-        width: 400px;
-        height: 50px;
-    }
-
-}
