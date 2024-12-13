@@ -31,49 +31,71 @@
 
 
     <script>
-
-        function pegarPeso (){
-            var inputP = document.getElementById("inputPeso")
-            inputP = parseFloat(inputP.value)
-            return inputP
+        function pegarPeso() {
+          var inputP = document.getElementById("inputPeso").value;
+          if (isNaN(inputP) || inputP === "") {
+            return null; // Retorna nulo se o valor não for um número
+          }
+          return parseFloat(inputP);
         }
-
-        function pegarAltura () {
-            var inputA = document.getElementById("inputAltura")
-            inputA = parseFloat(inputA.value)
-            return inputA
+  
+        function pegarAltura() {
+          var inputA = document.getElementById("inputAltura").value;
+          if (isNaN(inputA) || inputA === "") {
+            return null; // Retorna nulo se o valor não for um número
+          }
+          return parseFloat(inputA);
         }
-
+  
         function CalcularIMC() {
-            var altura = pegarAltura() 
-            var peso = pegarPeso()
-
-            var calculo = peso / (altura**2)
-
-            return calculo
+          var altura = pegarAltura();
+          var peso = pegarPeso();
+  
+          if (altura === null || peso === null || altura <= 0 || peso <= 0) {
+            return null; // Retorna nulo se os valores não forem válidos
+          }
+  
+          return peso / altura ** 2;
         }
-
+  
         function exibirResultado() {
-            var resultado = document.getElementById('imcResultado')
-            var calculo = CalcularIMC()
-
-            resultado.textContent = "Seu IMC é: " + calculo.toFixed(2)
-
-            if(calculo < 18.5){
-                resultado.textContent += ". Você está abaixo do peso"
-            }else if(calculo >= 18.5 && calculo <= 24.5){
-                resultado.textContent += ". Você está com o peso normal"
-            }else if(calculo >= 25 && calculo <= 29.9){
-                resultado.textContent += ". Você está com sobrepeso"
-            }else if(calculo >= 30){
-                resultado.textContent += ". Você está com obesidade"
-            }
+          var resultado = document.getElementById("imcResultado");
+  
+          // Limpar mensagem anterior
+          resultado.textContent = "";
+  
+          // Verifica se os valores são válidos
+          var altura = pegarAltura();
+          var peso = pegarPeso();
+  
+          if (altura === null || peso === null) {
+            resultado.textContent = "Por favor, insira apenas números válidos nos campos.";
+            return;
+          }
+  
+          var calculo = CalcularIMC();
+  
+          if (calculo === null) {
+            resultado.textContent = "Por favor, insira valores maiores que zero.";
+            return;
+          }
+  
+          resultado.textContent = "Seu IMC é: " + calculo.toFixed(2);
+  
+          if (calculo < 18.5) {
+            resultado.textContent += ". Você está abaixo do peso.";
+          } else if (calculo >= 18.5 && calculo <= 24.5) {
+            resultado.textContent += ". Você está com o peso normal.";
+          } else if (calculo >= 25 && calculo <= 29.9) {
+            resultado.textContent += ". Você está com sobrepeso.";
+          } else if (calculo >= 30) {
+            resultado.textContent += ". Você está com obesidade.";
+          }
         }
-
-        var botao = document.getElementById("botaoEnviar")
-        botao.addEventListener('click', exibirResultado)
-
-    </script>
+  
+        var botao = document.getElementById("botaoEnviar");
+        botao.addEventListener("click", exibirResultado);
+      </script>
 
 </body>
 </html>
